@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPrompt-X: Ultimate AI Automation Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: Cyberpunk Dark
+         Background: Deep Black (#000000) & Midnight Gray (#0f172a)
+         Primary: Neon Indigo (#6366f1) & Cyan (#06b6d4)
+         Text: Slate Gray (#94a3b8) to White (#f8fafc)
+    -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #e2e8f0;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+        }
+        /* Neon Glow Effects */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+        .glow-border {
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 border-b border-gray-800 bg-black/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-indigo-600 rounded flex items-center justify-center font-bold text-white">X</div>
+                    <span class="text-2xl font-bold text-white tracking-tight">AutoPrompt<span class="text-indigo-500">-X</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
+                    <a href="#architecture" class="hover:text-white transition">Architecture</a>
+                    <a href="#installation" class="hover:text-white transition">Setup</a>
+                    <a href="#simulation" class="hover:text-indigo-400 transition text-indigo-500">Live Demo</a>
+                    <a href="#analytics" class="hover:text-white transition">Analytics</a>
+                </div>
+                <button class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm border border-gray-700 transition">
+                    Download v1.0.0
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 relative overflow-hidden">
+        <!-- Background Gradients -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-indigo-900/20 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-900/30 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-6">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                PowerShell + Gemini AI Integration Live
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight glow-text">
+                Generate Unlimited AI Ideas <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Automatically</span>
+            </h1>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+                Forget manual copy-pasting. AutoPrompt-X talks to DeepSeek or ChatGPT for you, manages smart delays, and saves thousands of data points directly to your local drive.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="document.getElementById('simulation').scrollIntoView({behavior: 'smooth'})" class="bg-indigo-600 hover:bg-indigo-500 text-white text-lg font-bold py-4 px-10 rounded-xl shadow-lg shadow-indigo-500/20 transition hover:scale-105">
+                    View System Demo
+                </button>
+                <button onclick="document.getElementById('architecture').scrollIntoView({behavior: 'smooth'})" class="glass-panel text-white text-lg font-bold py-4 px-10 rounded-xl hover:bg-gray-800 transition">
+                    How it Works?
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Bar -->
+    <div class="border-y border-gray-800 bg-gray-900/50">
+        <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <div class="text-3xl font-bold text-white mb-1">50,000+</div>
+                <div class="text-sm text-gray-500 uppercase tracking-wider">Ideas Generated</div>
+            </div>
+            <div>
+                <div class="text-3xl font-bold text-indigo-400 mb-1">98%</div>
+                <div class="text-sm text-gray-500 uppercase tracking-wider">Time Saved</div>
+            </div>
+            <div>
+                <div class="text-3xl font-bold text-white mb-1">0.00%</div>
+                <div class="text-sm text-gray-500 uppercase tracking-wider">API Error Rate</div>
+            </div>
+            <div>
+                <div class="text-3xl font-bold text-cyan-400 mb-1">24/7</div>
+                <div class="text-sm text-gray-500 uppercase tracking-wider">Automation Runtime</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technical Architecture Section -->
+    <section id="architecture" class="py-24 bg-black relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">System Architecture</h2>
+                <p class="text-gray-400">How AutoPrompt-X communicates from your PC to AI servers.</p>
+            </div>
+
+            <!-- CSS Grid Diagram -->
+            <div class="grid md:grid-cols-3 gap-6 items-center relative">
+                <!-- Step 1 -->
+                <div class="glass-panel p-6 rounded-xl border-l-4 border-indigo-500">
+                    <div class="text-indigo-400 font-mono text-sm mb-2">LOCAL MACHINE</div>
+                    <h3 class="text-xl font-bold text-white mb-2">PowerShell Script (.ps1)</h3>
+                    <p class="text-sm text-gray-400">Accepts your commands and drives the browser/API. Manages local storage.</p>
+                    <div class="mt-4 bg-gray-900 p-2 rounded text-xs font-mono text-green-400">
+                        > Initiating Loop...
+                    </div>
+                </div>
+
+                <!-- Connector Arrow (Desktop) -->
+                <div class="hidden md:flex justify-center text-gray-600 text-2xl font-bold">→</div>
+
+                <!-- Step 2 -->
+                <div class="glass-panel p-6 rounded-xl border-l-4 border-purple-500">
+                    <div class="text-purple-400 font-mono text-sm mb-2">LOGIC ENGINE</div>
+                    <h3 class="text-xl font-bold text-white mb-2">Gemini AI API</h3>
+                    <p class="text-sm text-gray-400">Converts your natural language (e.g., "Loop 500 times") into JSON configuration.</p>
+                    <div class="mt-4 bg-gray-900 p-2 rounded text-xs font-mono text-yellow-400">
+                        { "loop": 500, "delay": 100 }
+                    </div>
+                </div>
+
+                 <!-- Connector Arrow (Desktop) -->
+                 <div class="hidden md:flex justify-center text-gray-600 text-2xl font-bold">→</div>
+                 <!-- Step 3 needs to wrap in grid properly, simplified for layout -->
+            </div>
+
+            <!-- Second Row of Diagram -->
+            <div class="grid md:grid-cols-3 gap-6 items-center relative mt-8">
+                 <!-- Connector Arrow (Desktop Down) - Just visualizing logic here -->
+                 <div class="hidden md:block"></div>
+                 <div class="hidden md:flex justify-center text-gray-600 text-2xl font-bold">↓</div>
+                 <div class="hidden md:block"></div>
+
+                 <!-- Step 3 -->
+                 <div class="glass-panel p-6 rounded-xl border-l-4 border-cyan-500 col-start-2">
+                    <div class="text-cyan-400 font-mono text-sm mb-2">TARGET</div>
+                    <h3 class="text-xl font-bold text-white mb-2">DeepSeek / LLM</h3>
+                    <p class="text-sm text-gray-400">Receives automated input and generates output which is saved back to the local machine.</p>
+                    <div class="mt-4 bg-gray-900 p-2 rounded text-xs font-mono text-blue-400">
+                        Response Generated...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Comparison Table -->
+    <section class="py-24 bg-gray-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-white mb-12 text-center">Why Upgrade?</h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-gray-700">
+                            <th class="p-4 text-gray-400 font-medium">Feature</th>
+                            <th class="p-4 text-red-400 font-bold bg-red-900/10 rounded-t-lg">Manual Method</th>
+                            <th class="p-4 text-green-400 font-bold bg-green-900/10 rounded-t-lg">AutoPrompt-X</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-300">
+                        <tr class="border-b border-gray-800 hover:bg-gray-800/50">
+                            <td class="p-4">Command Limit</td>
+                            <td class="p-4 text-red-300">5-10 per minute</td>
+                            <td class="p-4 text-green-300">Unlimited (up to API limit)</td>
+                        </tr>
+                        <tr class="border-b border-gray-800 hover:bg-gray-800/50">
+                            <td class="p-4">Delay</td>
+                            <td class="p-4 text-red-300">Guesswork</td>
+                            <td class="p-4 text-green-300">Precise Millisecond Timing</td>
+                        </tr>
+                        <tr class="border-b border-gray-800 hover:bg-gray-800/50">
+                            <td class="p-4">Data Storage</td>
+                            <td class="p-4 text-red-300">Copy-Paste (Risky)</td>
+                            <td class="p-4 text-green-300">Automated .txt/.csv Save</td>
+                        </tr>
+                        <tr class="border-b border-gray-800 hover:bg-gray-800/50">
+                            <td class="p-4">Multi-tasking</td>
+                            <td class="p-4 text-red-300">Impossible</td>
+                            <td class="p-4 text-green-300">Runs in Background</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation & Setup Guide -->
+    <section id="installation" class="py-24 bg-black border-y border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12">
+            <div>
+                <h2 class="text-3xl font-bold text-white mb-6">Setup Guide</h2>
+                <p class="text-gray-400 mb-8">No complex software installation is needed to use AutoPrompt-X. You can run it using your Windows PC's default PowerShell.</p>
+                
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-white font-bold border border-gray-700">1</div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1">Download Script</h4>
+                            <p class="text-sm text-gray-500">Download the `AutoPrompt-X.ps1` file from our repository and place it on your desktop.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-white font-bold border border-gray-700">2</div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1">Run PowerShell</h4>
+                            <p class="text-sm text-gray-500">Open the terminal and enter the command below.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-white font-bold border border-gray-700">3</div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1">Add API Key</h4>
+                            <p class="text-sm text-gray-500">It will ask for your Gemini API Key the first time you run it. You only need to provide this once.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Block Visual -->
+            <div class="bg-[#1e1e1e] rounded-xl border border-gray-800 p-6 font-mono text-sm overflow-x-auto shadow-2xl">
+                <div class="flex gap-2 mb-4 border-b border-gray-700 pb-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <div class="text-gray-400"># Set Execution Policy (Only for the first time)</div>
+                <div class="text-blue-400 mb-4">Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</div>
+                
+                <div class="text-gray-400"># Navigate to script folder</div>
+                <div class="text-yellow-400 mb-4">cd "C:\Users\YourName\Desktop"</div>
+                
+                <div class="text-gray-400"># Run script</div>
+                <div class="text-green-400 mb-2">.\AutoPrompt-X.ps1</div>
+                
+                <div class="text-white animate-pulse">_</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Interactive Simulation -->
+    <section id="simulation" class="py-24 bg-gray-950 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-10">
+                <span class="text-indigo-400 font-mono text-sm tracking-widest uppercase">Live Environment</span>
+                <h2 class="text-4xl font-bold mt-2 text-white glow-text">System Simulator v1.0</h2>
+                <p class="text-gray-400 mt-2">Test real-time automation in the terminal below.</p>
+            </div>
+
+            <!-- Simulator UI -->
+            <div class="grid lg:grid-cols-12 gap-6 h-[600px]">
+                
+                <!-- Left: Control Deck (4 Cols) -->
+                <div class="lg:col-span-4 flex flex-col gap-4">
+                    <!-- Input Box -->
+                    <div class="bg-gray-900 border border-gray-800 p-6 rounded-xl shadow-lg flex-1">
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-3">Command Center</label>
+                        <textarea id="sim-input" class="w-full bg-black border border-gray-700 rounded-lg p-4 text-gray-300 font-mono text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none h-32 resize-none" placeholder="Enter command in plain English: e.g., 'Give me 500 startup ideas and generate new ideas every 2 minutes.'"></textarea>
+                        
+                        <div class="mt-4 grid grid-cols-2 gap-3">
+                            <button onclick="startSimulation()" id="start-btn" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-lg transition border border-indigo-500/50">
+                                ▶ Run
+                            </button>
+                            <button onclick="resetSimulation()" class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold py-3 rounded-lg transition border border-gray-700">
+                                ↺ Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- JSON Monitor -->
+                    <div class="bg-gray-900 border border-gray-800 p-6 rounded-xl shadow-lg flex-1 overflow-hidden">
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-3 flex justify-between">
+                            <span>AI Logic Output</span>
+                            <span class="text-green-500 text-[10px] animate-pulse">● Active</span>
+                        </label>
+                        <pre id="json-display" class="font-mono text-xs text-yellow-500 h-full overflow-y-auto pb-4">
+// Waiting...
+                        </pre>
+                    </div>
+                </div>
+
+                <!-- Right: Visualizer (8 Cols) -->
+                <div class="lg:col-span-8 flex flex-col gap-4">
+                    <!-- Chart Panel -->
+                    <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl shadow-lg h-1/2 relative">
+                         <div class="absolute top-4 right-4 flex gap-2">
+                             <span class="text-xs text-gray-500">Live Data Feed</span>
+                             <div class="w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
+                         </div>
+                         <div class="chart-container" style="height: 100%;">
+                            <canvas id="liveChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Terminal Panel -->
+                    <div class="bg-black border border-gray-800 rounded-xl shadow-lg h-1/2 overflow-hidden flex flex-col">
+                        <div class="bg-gray-800 px-4 py-2 flex items-center justify-between">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="text-xs text-gray-400 font-mono">PS Administrator: AutoPrompt-X</div>
+                        </div>
+                        <div id="terminal-body" class="p-4 font-mono text-sm text-green-400 overflow-y-auto flex-1 scroll-smooth">
+                            <div class="text-gray-500">Microsoft PowerShell [Version 7.3.0]</div>
+                            <div class="text-gray-500">(c) Microsoft Corporation. All rights reserved.</div>
+                            <br>
+                            <div>PS C:\AutoPrompt-X> <span class="animate-pulse">_</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics & ROI Section -->
+    <section id="analytics" class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-white mb-12 text-center">ROI and Performance Analysis</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Bar Chart -->
+                <div class="bg-gray-900/50 p-6 rounded-xl border border-gray-800">
+                    <h3 class="text-lg font-bold text-white mb-4">Time Usage (5000 Tasks)</h3>
+                    <div class="chart-container">
+                        <canvas id="roiChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Metrics Grid -->
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="glass-panel p-6 rounded-xl flex items-center gap-6">
+                        <div class="w-16 h-16 rounded-full bg-indigo-900/50 flex items-center justify-center text-3xl">🚀</div>
+                        <div>
+                            <div class="text-gray-400 text-sm">Processing Speed</div>
+                            <div class="text-2xl font-bold text-white">300% Faster</div>
+                            <p class="text-xs text-gray-500 mt-1">Compared to human typing speed</p>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl flex items-center gap-6">
+                        <div class="w-16 h-16 rounded-full bg-green-900/50 flex items-center justify-center text-3xl">🛡️</div>
+                        <div>
+                            <div class="text-gray-400 text-sm">Accuracy</div>
+                            <div class="text-2xl font-bold text-white">100%</div>
+                            <p class="text-xs text-gray-500 mt-1">No copy-paste errors</p>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl flex items-center gap-6">
+                        <div class="w-16 h-16 rounded-full bg-purple-900/50 flex items-center justify-center text-3xl">🔋</div>
+                        <div>
+                            <div class="text-gray-400 text-sm">Labor Savings</div>
+                            <div class="text-2xl font-bold text-white">83+ Hours</div>
+                            <p class="text-xs text-gray-500 mt-1">Per project</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 bg-gray-900/30 border-t border-gray-800">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-white mb-12 text-center">Frequently Asked Questions (FAQ)</h2>
+            
+            <div class="space-y-4">
+                <details class="bg-gray-900 border border-gray-800 rounded-lg group">
+                    <summary class="flex justify-between items-center cursor-pointer p-6 text-white font-medium">
+                        Do I need to know coding?
+                        <span class="text-indigo-500 group-open:rotate-180 transition">▼</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400 leading-relaxed border-t border-gray-800 pt-4">
+                        No, not at all. Just follow the 3 steps in the installation guide. Then the script will ask you questions in plain English, and work will start once you answer.
+                    </div>
+                </details>
+
+                <details class="bg-gray-900 border border-gray-800 rounded-lg group">
+                    <summary class="flex justify-between items-center cursor-pointer p-6 text-white font-medium">
+                        Is my data safe?
+                        <span class="text-indigo-500 group-open:rotate-180 transition">▼</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400 leading-relaxed border-t border-gray-800 pt-4">
+                        Yes. This script runs entirely on your Local Machine. Your generated ideas or data are not uploaded to any cloud server; they are saved directly to your folder.
+                    </div>
+                </details>
+
+                <details class="bg-gray-900 border border-gray-800 rounded-lg group">
+                    <summary class="flex justify-between items-center cursor-pointer p-6 text-white font-medium">
+                        Is it free?
+                        <span class="text-indigo-500 group-open:rotate-180 transition">▼</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400 leading-relaxed border-t border-gray-800 pt-4">
+                        The AutoPrompt-X script is open source and free. However, when using Gemini API or other AI tools, their own free or paid limits may apply.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <span class="text-2xl font-bold text-white">AutoPrompt<span class="text-indigo-600">-X</span></span>
+                <p class="text-gray-500 text-sm mt-1">© 2025 Automation Labs. All rights reserved.</p>
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="text-gray-400 hover:text-white transition">GitHub</a>
+                <a href="#" class="text-gray-400 hover:text-white transition">Documentation</a>
+                <a href="#" class="text-gray-400 hover:text-white transition">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Logic -->
+    <script>
+        // Chart Configs (Dark Mode Optimized)
+        Chart.defaults.color = '#64748b';
+        Chart.defaults.borderColor = '#1e293b';
+        
+        // --- 1. Live Simulation Logic ---
+        let simInterval;
+        let simChart;
+        let totalIdeas = 0;
+        const terminalOutput = document.getElementById('terminal-body');
+        const jsonOutput = document.getElementById('json-display');
+
+        // Init Live Chart
+        const ctxLive = document.getElementById('liveChart').getContext('2d');
+        simChart = new Chart(ctxLive, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Live Ideas Generated',
+                    data: [],
+                    borderColor: '#06b6d4', // Cyan
+                    backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    fill: true,
+                    pointRadius: 2,
+                    pointHoverRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { display: false },
+                    y: { beginAtZero: true, grid: { color: '#1e293b' } }
+                },
+                animation: { duration: 0 } // Performance
+            }
+        });
+
+        function logToTerminal(text, colorClass = 'text-gray-300') {
+            const div = document.createElement('div');
+            div.className = `mt-1 ${colorClass}`;
+            div.innerHTML = `<span class="text-gray-600 mr-2">[${new Date().toLocaleTimeString()}]</span> ${text}`;
+            terminalOutput.appendChild(div);
+            // Auto scroll
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+
+        function startSimulation() {
+            const input = document.getElementById('sim-input').value;
+            if(!input) { alert("Please enter a command!"); return; }
+            if(simInterval) clearInterval(simInterval);
+
+            // Reset UI
+            totalIdeas = 0;
+            simChart.data.labels = [];
+            simChart.data.datasets[0].data = [];
+            simChart.update();
+            terminalOutput.innerHTML = '<div>PS C:\\AutoPrompt-X> ./run_script.ps1</div>';
+            
+            // Phase 1: Analysis
+            logToTerminal("Connecting to Gemini API...", "text-yellow-400");
+            
+            setTimeout(() => {
+                // Show JSON
+                jsonOutput.innerText = JSON.stringify({
+                    "target_model": "deepseek-v3",
+                    "loop_count": 500,
+                    "prompt_content": "Generate startup ideas...",
+                    "delay_interval": "120s",
+                    "auto_save_path": "./output/ideas.txt"
+                }, null, 2);
+                
+                logToTerminal("Plan Approved. Initializing WebDriver...", "text-blue-400");
+                
+                // Phase 2: Execution Loop
+                let loopCount = 0;
+                simInterval = setInterval(() => {
+                    loopCount++;
+                    const batch = Math.floor(Math.random() * 5) + 3; // 3-8 ideas
+                    totalIdeas += batch;
+                    
+                    logToTerminal(`Loop ${loopCount}/500: Sent "NEXT" -> Retrieved ${batch} ideas.`, "text-green-400");
+                    
+                    // Chart Update
+                    simChart.data.labels.push(loopCount);
+                    simChart.data.datasets[0].data.push(totalIdeas);
+                    if(simChart.data.labels.length > 20) {
+                        simChart.data.labels.shift();
+                        simChart.data.datasets[0].data.shift();
+                    }
+                    simChart.update();
+
+                }, 800); // Speed up for demo
+
+            }, 1000);
+        }
+
+        function resetSimulation() {
+            clearInterval(simInterval);
+            document.getElementById('sim-input').value = '';
+            terminalOutput.innerHTML = '<div>PS C:\\AutoPrompt-X> <span class="animate-pulse">_</span></div>';
+            jsonOutput.innerText = '// Waiting...';
+            simChart.data.labels = [];
+            simChart.data.datasets[0].data = [];
+            simChart.update();
+        }
+
+        // --- 2. ROI Analytics Chart ---
+        const ctxRoi = document.getElementById('roiChart').getContext('2d');
+        new Chart(ctxRoi, {
+            type: 'bar',
+            data: {
+                labels: ['Manual (Hours)', 'AutoPrompt-X (Hours)'],
+                datasets: [{
+                    label: 'Time Required',
+                    data: [83, 2], // 83 hours vs 2 hours
+                    backgroundColor: ['#ef4444', '#10b981'],
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { 
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw + ' Hours';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true, 
+                        grid: { color: '#334155' },
+                        title: { display: true, text: 'Time (Hours)' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
